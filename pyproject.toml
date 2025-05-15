@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "api-auth"
+version = "0.1.0"
+description = "Microservice for authentication and email notifications"
+authors = ["brokewe <hqwerov@yandex.ru>"]
+packages = [
+    { include = "src", from = "." }
+]
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = "~3.12"
+fastapi = "^0.115.12"
+uvicorn = { extras = ["standard"], version = "^0.34.2" }
+sqlalchemy = { extras = ["asyncio"], version = "^2.0.41" }
+asyncpg = "^0.30.0"
+psycopg = { extras = ["binary"], version = "^3.2.9" }
+redis = "^6.1.0"
+python-jose = "^3.4.0"
+passlib = { extras = ["bcrypt"], version = "^1.7.4" }
+pydantic-settings = "^2.9.1"
+alembic = "^1.15.2"
+bcrypt = "^3.2.0"
+httpx = "^0.27.0"
+poetry-core = ">=2.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.6"
+httpx = "^0.27.0"
+black = "^24.4.0"
+isort = "^5.13.2"
+ruff = "^0.4.3"
+factory-boy = "^3.3.0"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "W", "I", "B", "C", "N", "RUF", "UP"]
+ignore = ["E501", "F401"]
+
+[tool.black]
+line-length = 120
+target-version = ['py312']

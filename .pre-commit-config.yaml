@@ -1,0 +1,33 @@
+repos:
+- repo: local
+  hooks:
+    - id: pre-commit-clean
+      name: Pre-commit Cache Clean
+      language: system
+      entry: poetry run pre-commit clean
+      pass_filenames: false
+      always_run: true
+
+    - id: pre-commit-gc
+      name: Pre-commit Garbage Collect
+      language: system
+      entry: poetry run pre-commit gc
+      pass_filenames: false
+      always_run: true
+
+    - id: ruff
+      name: Ruff
+      language: system
+      entry: poetry run ruff format
+      types: [ python ]
+      stages: [ pre-commit ]
+      always_run: true
+
+    - id: black
+      name: Black
+      stages: [ pre-commit ]
+      language: system
+      entry: poetry run black
+      args: ['.']
+      types: [ python ]
+      always_run: true
