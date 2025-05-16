@@ -1,11 +1,11 @@
-from sqlalchemy import select, update, delete
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.models.user import User
-from src.schemas.user import UserUpdate
+from src.types.repositories import IUserRepository
 
 
-class UserRepository:
+class UserRepository(IUserRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
 

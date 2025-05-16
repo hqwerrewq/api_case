@@ -2,12 +2,13 @@ from passlib.context import CryptContext
 
 from src.core.exceptions import InvalidCredentialsError, UserInactiveError
 from src.models import User
-from src.repositories.users import UserRepository
 from src.schemas.user import UserCreate
+from src.types.repositories import IUserRepository
+from src.types.services import IAuthService
 
 
-class AuthService:
-    def __init__(self, user_repo: UserRepository):
+class AuthService(IAuthService):
+    def __init__(self, user_repo: IUserRepository):
         self.user_repo = user_repo
         self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -31,5 +32,3 @@ class AuthService:
         if not user.verify_password(password):
             raise InvalidCredentialsError()
         return user
-
-

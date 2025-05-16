@@ -6,6 +6,7 @@ from src.core.security import create_access_token
 from src.schemas.user import UserCreate, UserResponse, UserLogin
 from src.services.auth import AuthService
 from src.services.email import EmailService
+from src.types.auth import TokenResponse
 
 router = APIRouter()
 
@@ -34,7 +35,7 @@ async def register(
 async def login(
         credentials: UserLogin,
         auth_service: AuthService = Depends(get_auth_service)
-):
+) -> TokenResponse:
     try:
         user = await auth_service.authenticate_user(
             email=credentials.email,

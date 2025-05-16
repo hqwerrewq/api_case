@@ -1,8 +1,11 @@
-from src.core.redis import redis_client
-from src.core.config import settings
 import json
 
-class EmailService:
+from src.core.config import settings
+from src.core.redis import redis_client
+from src.types.services import IAuthService
+
+
+class EmailService(IAuthService):
     @staticmethod
     async def send_welcome_email(email: str):
         message = f"Sending welcome email to {email}"
